@@ -48,9 +48,9 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
       // Check if the document exists
       Map<String, dynamic>? data = snap.data() as Map<String, dynamic>?;
 
-      if (data != null && data.containsKey("userName")) {
+      if (data != null && data.containsKey("username")) {
         setState(() {
-          userName = data["userName"];
+          userName = data["usename"];
         });
         log(userName);
       } else {
