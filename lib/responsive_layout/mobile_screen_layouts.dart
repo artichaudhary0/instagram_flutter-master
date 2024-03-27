@@ -2,7 +2,13 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_flutter/screens/account_screen.dart';
+import 'package:instagram_flutter/screens/home_screen.dart';
+import 'package:instagram_flutter/screens/post_screen.dart';
+import 'package:instagram_flutter/screens/reel_screen.dart';
+import 'package:instagram_flutter/screens/search_screen.dart';
 
 class MobileScreenLayout extends StatefulWidget {
   const MobileScreenLayout({Key? key}) : super(key: key);
@@ -13,6 +19,17 @@ class MobileScreenLayout extends StatefulWidget {
 
 class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   String userName = "";
+  int currentIndex = 0 ;
+
+  List<Widget> screen = [
+    HomeScreen(),
+    SearchScreen(),
+    PostScreen(),
+    ReelScreen(),
+    AccountScreen(),
+  ];
+
+
 
   @override
   void initState() {
@@ -32,7 +49,6 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
       Map<String, dynamic>? data = snap.data() as Map<String, dynamic>?;
 
       if (data != null && data.containsKey("userName")) {
-        // Check if "userName" is present in the data
         setState(() {
           userName = data["userName"];
         });
@@ -48,9 +64,28 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text("This is mobile screen"),
+
+      body: screen[currentIndex],
+
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentIndex,
+        onTap: (value){
+          setState(() {
+            currentIndex = value;
+          });
+        },
+
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home,color: Colors.white,),label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.search,color: Colors.white,),label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.post_add,color: Colors.white,),label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.slow_motion_video_rounded,color: Colors.white,),label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.account_circle_outlined,color: Colors.white,),label: ""),
+
+        ],
       ),
+
+
     );
   }
 }

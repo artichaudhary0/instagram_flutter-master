@@ -9,7 +9,7 @@ class Error2Screen extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Image.asset(
-            "assets/error.png",
+            "assets/images/Instagram.png",
             fit: BoxFit.cover,
           ),
         ],

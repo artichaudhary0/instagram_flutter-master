@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_flutter/responsive_layout/mobile_screen_layouts.dart';
-import 'package:instagram_flutter/responsive_layout/responsive_layout.dart';
+import 'package:instagram_flutter/responsive_layout/responsive_layouts.dart';
 import 'package:instagram_flutter/responsive_layout/web_screen_layout.dart';
 import 'package:instagram_flutter/screens/error_screen.dart';
 import 'package:instagram_flutter/screens/signin_screen.dart';
@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
             } else if (snapShot.hasError) {
               return Error2Screen();
             } else {
-              return const SignInScreen();
+              return const SignUpScreen();
             }
           } else if (snapShot.connectionState == ConnectionState.waiting) {
             return const Center(

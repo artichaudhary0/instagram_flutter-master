@@ -31,7 +31,7 @@ class AuthMethods {
         );
 
         String photoUrl = await StorageMethods()
-            .uploadImageToStorage('profilePics', file, false);
+            .uploadeImageToStorage('profilePics', file, false);
 
         //calling userModel
         UsersModel userModel = UsersModel(

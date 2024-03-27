@@ -5,12 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagram_flutter/resources/auth_method.dart';
-import 'package:instagram_flutter/responsive_layout/responsive_layout.dart';
-
 import 'package:instagram_flutter/responsive_layout/web_screen_layout.dart';
 import 'package:instagram_flutter/screens/signin_screen.dart';
 import 'package:instagram_flutter/utils/utils.dart';
 import '../responsive_layout/mobile_screen_layouts.dart';
+import '../responsive_layout/responsive_layouts.dart';
 import '../utils/colors.dart';
 import '../widgets/custom_textfield.dart';
 
@@ -33,7 +32,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void selectImage() async {
     Uint8List pickedImagePath =
-    await pickedImage(imageSource: ImageSource.gallery);
+        await pickedImage(imageSource: ImageSource.gallery);
     if (pickedImagePath != null) {
       setState(() {
         _pickedImage = pickedImagePath;
@@ -59,18 +58,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
       if (res != 'success') {
         showSnackBar(context: context, content: res);
-      }else {
+      } else {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
-              return ResponsiveLayout(
+              return const ResponsiveLayout(
                 webScreenLayout: WebScreenLayout(),
                 mobileScreenLayout: MobileScreenLayout(),
               );
             },
           ),
-        );}
+        );
+      }
     } catch (error) {
       showSnackBar(context: context, content: error.toString());
       setState(() {
@@ -79,10 +79,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
   }
 
-  void navigateToSignIn()
-  {
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>SignInScreen(),),);
+  void navigateToSignIn() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const SignInScreen(),
+      ),
+    );
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -107,8 +112,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: Container(),
                 flex: 2,
               ),
-              SvgPicture.asset(
-                "assets/instagram_logo.svg",
+              Image.asset(
+                "assets/images/Instagram.png",
                 color: primaryColor,
                 height: 64,
               ),
@@ -119,17 +124,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   _pickedImage != null
                       ? CircleAvatar(
-                    radius: 64,
-                    backgroundImage: MemoryImage(
-                      _pickedImage!,
-                    ),
-                  )
+                          radius: 64,
+                          backgroundImage: MemoryImage(
+                            _pickedImage!,
+                          ),
+                        )
                       : const CircleAvatar(
-                    radius: 64,
-                    backgroundImage: AssetImage(
-                      "assets/default.jpeg",
-                    ),
-                  ),
+                          radius: 64,
+                          backgroundImage: AssetImage(
+                            "assets/images/Instagram.png",
+                          ),
+                        ),
                   Positioned(
                     bottom: 0,
                     right: 5,
@@ -203,11 +208,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     color: blueColor,
                   ),
                   child: _isLoading
-                      ? Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.white,
-                    ),
-                  )
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        )
                       : const Text("Register"),
                 ),
               ),
@@ -230,8 +235,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
               Flexible(
-                child: Container(),
                 flex: 2,
+                child: Container(),
               ),
             ],
           ),

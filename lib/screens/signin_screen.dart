@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:instagram_flutter/resources/auth_method.dart';
 import 'package:instagram_flutter/responsive_layout/mobile_screen_layouts.dart';
-import 'package:instagram_flutter/responsive_layout/responsive_layout.dart';
 import 'package:instagram_flutter/responsive_layout/web_screen_layout.dart';
 import 'package:instagram_flutter/screens/signup_screen.dart';
 import 'package:instagram_flutter/utils/utils.dart';
 
+import '../responsive_layout/responsive_layouts.dart';
 import '../utils/colors.dart';
 import '../widgets/custom_textfield.dart';
 
@@ -87,8 +87,8 @@ class _SignInScreenState extends State<SignInScreen> {
                 child: Container(),
                 flex: 2,
               ),
-              SvgPicture.asset(
-                "assets/instagram_logo.svg",
+              Image.asset(
+                "assets/images/Instagram.png",
                 color: primaryColor,
                 height: 64,
               ),
