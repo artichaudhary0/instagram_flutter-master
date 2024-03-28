@@ -42,32 +42,33 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark()
           .copyWith(scaffoldBackgroundColor: mobileBackgroundColor),
-      home: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapShot) {
-          if (snapShot.connectionState == ConnectionState.active) {
-            if (snapShot.hasData) {
-              return const ResponsiveLayout(
-                webScreenLayout: WebScreenLayout(),
-                mobileScreenLayout: MobileScreenLayout(),);
-            } else if (snapShot.hasError) {
-              return Error2Screen();
-            } else {
-              return const SignUpScreen();
-            }
-          } else if (snapShot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (!snapShot.hasData) {
-            return const SignUpScreen();
-          } else {
-            return Text(
-              snapShot.error.toString(),
-            );
-          }
-        },
-      ),
+      home: SignInScreen(),
+      // home: StreamBuilder(
+      //   stream: FirebaseAuth.instance.authStateChanges(),
+      //   builder: (context, snapShot) {
+      //     if (snapShot.connectionState == ConnectionState.active) {
+      //       if (snapShot.hasData) {
+      //         return const ResponsiveLayout(
+      //           webScreenLayout: WebScreenLayout(),
+      //           mobileScreenLayout: MobileScreenLayout(),);
+      //       } else if (snapShot.hasError) {
+      //         return Error2Screen();
+      //       } else {
+      //         return const SignUpScreen();
+      //       }
+      //     } else if (snapShot.connectionState == ConnectionState.waiting) {
+      //       return const Center(
+      //         child: CircularProgressIndicator(),
+      //       );
+      //     } else if (!snapShot.hasData) {
+      //       return const SignUpScreen();
+      //     } else {
+      //       return Text(
+      //         snapShot.error.toString(),
+      //       );
+      //     }
+      //   },
+      // ),
     );
   }
 }

@@ -31,10 +31,27 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   ];
 
   void getData() async {
-    DocumentSnapshot data = await FirebaseFirestore.instance.collection("users").doc(
+    DocumentSnapshot snap = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(
           FirebaseAuth.instance.currentUser!.uid,
-        ).get();
-    print(data.data());
+        )
+        .get();
+
+    if (snap.exists) {
+      Map<String, dynamic>? data = snap.data() as Map<String, dynamic>?;
+
+      if (data != null && data.containsKey("username")) {
+        setState(() {
+          username = data["username"];
+        });
+        log(username);
+      } else {
+        log("username field is missing in the document");
+      }
+    } else {
+      log("document does not exist");
+    }
   }
 
   @override
