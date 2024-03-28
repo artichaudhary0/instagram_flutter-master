@@ -18,8 +18,9 @@ class MobileScreenLayout extends StatefulWidget {
 }
 
 class _MobileScreenLayoutState extends State<MobileScreenLayout> {
-  String userName = "";
-  int currentIndex = 0 ;
+  String username = "";
+
+  int currentIndex = 0;
 
   List<Widget> screen = [
     HomeScreen(),
@@ -29,63 +30,87 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
     AccountScreen(),
   ];
 
-
+  void getData() async {
+    DocumentSnapshot data = await FirebaseFirestore.instance.collection("users").doc(
+          FirebaseAuth.instance.currentUser!.uid,
+        ).get();
+    print(data.data());
+  }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getData();
   }
 
-  void getData() async {
-    DocumentSnapshot snap = await FirebaseFirestore.instance
-        .collection("users")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get();
-
-    if (snap.exists) {
-      // Check if the document exists
-      Map<String, dynamic>? data = snap.data() as Map<String, dynamic>?;
-
-      if (data != null && data.containsKey("username")) {
-        setState(() {
-          userName = data["usename"];
-        });
-        log(userName);
-      } else {
-        log("userName field is missing in the document");
-      }
-    } else {
-      log("Document does not exist");
-    }
-  }
+  // void getData() async {
+  //   DocumentSnapshot snap = await FirebaseFirestore.instance
+  //       .collection("users")
+  //       .doc(FirebaseAuth.instance.currentUser!.uid)
+  //       .get();
+  //   print(snap.data());
+  //
+  //   if (snap.exists) {
+  //     // Check if the document exists
+  //     Map<String, dynamic>? data = snap.data() as Map<String, dynamic>?;
+  //
+  //     if (data != null && data.containsKey("username")) {
+  //       setState(() {
+  //         userName = data["usename"];
+  //       });
+  //       log(userName);
+  //     } else {
+  //       log("userName field is missing in the document");
+  //     }
+  //   } else {
+  //     log("Document does not exist");
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: screen[currentIndex],
-
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
-        onTap: (value){
+        onTap: (value) {
           setState(() {
             currentIndex = value;
           });
         },
-
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home,color: Colors.white,),label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.search,color: Colors.white,),label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.post_add,color: Colors.white,),label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.slow_motion_video_rounded,color: Colors.white,),label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.account_circle_outlined,color: Colors.white,),label: ""),
-
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+                color: Colors.white,
+              ),
+              label: ""),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+              label: ""),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.post_add,
+                color: Colors.white,
+              ),
+              label: ""),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.slow_motion_video_rounded,
+                color: Colors.white,
+              ),
+              label: ""),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.account_circle_outlined,
+                color: Colors.white,
+              ),
+              label: ""),
         ],
       ),
-
-
     );
   }
 }
