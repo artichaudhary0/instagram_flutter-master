@@ -30,11 +30,10 @@ class UsersModel{
         "following" : following,
         "photoUrl" : photoUrl,
       };
-  static User fromSnap(DocumentSnapshot snap){
+  static UsersModel fromSnap(DocumentSnapshot snap){
     var snapShot = snap.data() as Map<String, dynamic>;
-    return User(
+    return UsersModel(
       username: snapShot['username'],
-      uid: snapShot['uid'],
       email: snapShot['email'],
       password: snapShot['password'],
       bio: snapShot['bio'],
