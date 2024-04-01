@@ -42,50 +42,47 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   Widget build(BuildContext context) {
     model.UsersModel? usersModel = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
-      body: Center(
-        child: Text(usersModel!.username),
+      body: screen[currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentIndex,
+        onTap: (value) {
+          setState(() {
+            currentIndex = value;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+                color: Colors.white,
+              ),
+              label: ""),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+              label: ""),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.post_add,
+                color: Colors.white,
+              ),
+              label: ""),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.slow_motion_video_rounded,
+                color: Colors.white,
+              ),
+              label: ""),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.account_circle_outlined,
+                color: Colors.white,
+              ),
+              label: ""),
+        ],
       ),
-      // body: screen[currentIndex],
-      // bottomNavigationBar: BottomNavigationBar(
-      //   currentIndex: currentIndex,
-      //   onTap: (value) {
-      //     setState(() {
-      //       currentIndex = value;
-      //     });
-      //   },
-      //   items: [
-      //     BottomNavigationBarItem(
-      //         icon: Icon(
-      //           Icons.home,
-      //           color: Colors.white,
-      //         ),
-      //         label: ""),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(
-      //           Icons.search,
-      //           color: Colors.white,
-      //         ),
-      //         label: ""),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(
-      //           Icons.post_add,
-      //           color: Colors.white,
-      //         ),
-      //         label: ""),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(
-      //           Icons.slow_motion_video_rounded,
-      //           color: Colors.white,
-      //         ),
-      //         label: ""),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(
-      //           Icons.account_circle_outlined,
-      //           color: Colors.white,
-      //         ),
-      //         label: ""),
-      //   ],
-      // ),
     );
   }
 }
